@@ -65,7 +65,7 @@
 // src/middleware/index.js
 const authMiddleware = require("./auth_middleware");
 const adminMiddleware = require("./admin_middleware");
-const createPermissionMiddleware = require("./permission.user");
+const createPermissionMiddleware = require("./permission.middleware");
 
 const { UserPermission } = require("../../models");
 const createUserPermissionRepo = require("../data-acess/user-permission");

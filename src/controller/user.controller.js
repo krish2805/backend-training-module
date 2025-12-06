@@ -86,7 +86,8 @@ module.exports = ({
             if (!req.session.user) {
                 return res.status(401).json({ error: "Not authenticated" });
             }
-
+  
+             const targetUserId = req.params.id || req.session.user.id;
             const result = await updateProfileUsecase({
                 userId: req.session.user.id,
                 profileData: req.body,
@@ -103,6 +104,8 @@ module.exports = ({
             if (!req.session.user) {
                 return res.status(401).json({ error: "Not authenticated" });
             }
+
+            const targetUserId = req.params.id || req.session.user.id;
 
             const result = await softDeleteUserCase({
                 userId: req.session.user.id,
