@@ -34,12 +34,22 @@ module.exports = ({ User }) => {
             { where: { id, is_deleted: false } }
         );
         return findById(id);
+
+    }
+
+    async function hardDeleteSoftDeletedUsers() {
+        return User.destroy({
+            where: {
+                is_deleted: true,
+            },
+        });
     }
     return {
         createUser,
         findByUsername,
         findById,
         updateById,
-        softDeleteById
+        softDeleteById,
+        hardDeleteSoftDeletedUsers
     };
 };

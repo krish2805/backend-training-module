@@ -1,14 +1,15 @@
 
+const cron = require("node-cron");
 
-async function runCronTask() {
-    try {
-        console.log("🔁 Running scheduled task...");
+module.exports = ({ userRepository }) => {
 
-    } catch (error) {
-        console.error("❌ CRON JOB ERROR:", error.message);
-    }
-}
-
-module.exports = { runCronTask };
-
-
+    cron.schedule("*/1 * * * *", async () => {
+        try {
+            console.log("Cron start: hard delete soft-deleted users");
+            const deleted = await userRepository.hardDeleteSoftDeletedUsers();
+            console.log("Cron done, deleted:", deleted);
+        } catch (err) {
+            console.error("Cron error:", err);
+        }
+    });
+};

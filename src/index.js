@@ -8,10 +8,12 @@ const createRoutes = require("./routes/user.index");
 const createPermissionRoute = require("./routes/permission.index");
 const createUserPermissionRoutes = require("./routes/userper.index");
 const db = require("./db/index");
+const initCronJobs = require("./crone-job");
 
 const userRoute = createRoutes();
 const permissionRoute = createPermissionRoute();
 const userPermissionRoute = createUserPermissionRoutes();
+initCronJobs({ db });
 
 
 

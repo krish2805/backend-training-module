@@ -1,0 +1,18 @@
+module.exports = ({ userRepo, hashPassword }) => {
+  return async ({ username, password, address1, address2, phone_number, is_admin }) => {
+    if (!username || !password) {
+      throw new Error("Username & password are required");
+    }
+
+    const hashed = await hashPassword(password);
+
+    return userRepo.registerUser({
+      username,
+      password: hashed,
+      address1,
+      address2,
+      phone_number,
+      is_admin: is_admin || false
+    });
+  };
+};

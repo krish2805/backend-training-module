@@ -1,10 +1,9 @@
-// crone-job/index.js
-const cron = require("node-cron");
-const { runCronTask } = require("./crone");
+// src/crone-job/index.js
+const setupUserCron = require("./crone");
+const createUserRepo = require("../data-acess/userepo");
+const { User } = require("../../models"); 
 
-// Runs every 1 minute (for testing)
-// Change schedule as needed (examples below)
-cron.schedule("* * * * *", async () => {
-    console.log("⏳ CRON JOB TRIGGERED:", new Date().toISOString());
-    await runCronTask();
-});
+module.exports = () => {
+  const userRepository = createUserRepo({ User }); 
+  setupUserCron({ userRepository });
+};
