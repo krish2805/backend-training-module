@@ -9,6 +9,8 @@ module.exports = ({
     updatePasswordUsecase,
     updateProfileUsecase,
     softDeleteUserCase,
+    createUserByPermissionUsecase,
+
 }) => {
 
     async function register(req, res, next) {
@@ -86,10 +88,9 @@ module.exports = ({
             if (!req.session.user) {
                 return res.status(401).json({ error: "Not authenticated" });
             }
-  
-             const targetUserId = req.params.id || req.session.user.id;
+  const targetUserId = req.params.id || req.session.user.id;
             const result = await updateProfileUsecase({
-                userId: req.session.user.id,
+                userId: targetUserId,
                 profileData: req.body,
             });
 
@@ -108,12 +109,21 @@ module.exports = ({
             const targetUserId = req.params.id || req.session.user.id;
 
             const result = await softDeleteUserCase({
-                userId: req.session.user.id,
+                userId: targetUserId,
             });
 
             req.session.destroy(() => { });
 
             return res.status(200).json(result);
+        } catch (err) {
+            return res.status(400).json({ error: err.message });
+        }
+    }
+
+    async function createUserWithPermission(req, res) {
+        try {
+            const result = await createUserByPermissionUsecase(req.body);
+            return res.status(201).json(result);
         } catch (err) {
             return res.status(400).json({ error: err.message });
         }
@@ -127,5 +137,6 @@ module.exports = ({
         updatePassword,
         updateProfile,
         softDeleteUser,
+        createUserWithPermission
     };
 };

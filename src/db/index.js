@@ -1,4 +1,4 @@
-// db/index.js
+
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
@@ -13,7 +13,6 @@ const sequelize = new Sequelize(
   }
 );
 
-// expose authenticate so app.js can call db.authenticate()
 const authenticate = async () => {
   try {
     await sequelize.authenticate();

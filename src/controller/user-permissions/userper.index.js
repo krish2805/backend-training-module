@@ -2,8 +2,8 @@
 
 const createUserPermissionController = require("./userpermission.controller");
 
-const createUserPermissionUsecaseFactory = require("../usecase/user-per/createuper");
-const updateUserPermissionUsecaseFactory = require("../usecase/user-per/updateuper");
+const createUserPermissionUsecaseFactory = require("../../usecase/user-per/createuper");
+const updateUserPermissionUsecaseFactory = require("../../usecase/user-per/updateuper");
 
 function createUserPermissionControllers({ userPermissionRepo }) {
     const createUserPermissionUsecase = createUserPermissionUsecaseFactory({

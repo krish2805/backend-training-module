@@ -1,6 +1,6 @@
 // src/crone-job/index.js
 const setupUserCron = require("./crone");
-const createUserRepo = require("../data-acess/userepo");
+const createUserRepo = require("../data-acess/userrepo");
 const { User } = require("../../models"); 
 
 module.exports = () => {

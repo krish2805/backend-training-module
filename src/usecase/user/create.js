@@ -6,13 +6,14 @@ module.exports = ({ userRepo, hashPassword }) => {
 
     const hashed = await hashPassword(password);
 
-    return userRepo.registerUser({
+    return userRepo.createUser({
       username,
       password: hashed,
       address1,
       address2,
       phone_number,
-      is_admin: is_admin || false
+      is_admin: is_admin || false,
+      created_at: new Date(),
     });
   };
 };

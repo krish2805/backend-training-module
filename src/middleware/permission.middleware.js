@@ -1,6 +1,4 @@
 
-
-
 const ACTION_COLUMN_MAP = {
     create: "can_create",
     update: "can_update",
